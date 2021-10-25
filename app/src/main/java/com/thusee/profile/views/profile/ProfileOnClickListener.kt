@@ -3,7 +3,7 @@ package com.thusee.profile.views.profile
 import android.content.Intent
 import android.view.View
 import com.thusee.profile.R
-import com.thusee.profile.views.EditProfileActivity
+import com.thusee.profile.views.editprofile.EditProfileActivity
 
 class ProfileOnClickListener(private val viewModel: ProfileViewModel): View.OnClickListener {
 

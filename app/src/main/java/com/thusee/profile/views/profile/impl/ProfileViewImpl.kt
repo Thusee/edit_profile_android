@@ -4,6 +4,7 @@ import android.app.Activity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import com.bumptech.glide.Glide
 import com.thusee.profile.R
 import com.thusee.profile.data.response.Data
 import com.thusee.profile.util.handleError
@@ -42,27 +43,33 @@ class ProfileViewImpl: ProfileView {
 
     private fun updateProfile(data: Data) {
         rootView?.apply {
-            this.displayNameText.text = data.displayName
-            this.birthdayText.text = data.birthday
-            this.genderText.text = data.gender
-            this.ethnicityText.text = data.ethnicity
-            this.religionText.text = data.religion
-            this.heightText.text = "${data.height}"
-            this.figureText.text = data.figure
-            this.aboutMeText.text = data.aboutMe
-            this.locationText.text = data.location?.city
+            displayNameText.text = data.displayName
+            birthdayText.text = data.birthday
+            genderText.text = data.gender
+            ethnicityText.text = data.ethnicity
+            religionText.text = data.religion
+            heightText.text = "${data.height}"
+            figureText.text = data.figure
+            aboutMeText.text = data.aboutMe
+            locationText.text = data.location?.city
+
+            Glide.with(rootView.context)
+                .load(data.profilePic)
+                .fitCenter()
+                .placeholder(R.mipmap.ic_launcher_round)
+                .into(profilePicture)
         }
     }
 
     private fun showProgress() {
         rootView?.apply {
-            this.rowLoadingAnim.visibility = View.VISIBLE
+            rowLoadingAnim.visibility = View.VISIBLE
         }
     }
 
     private fun hideProgress() {
         rootView?.apply {
-            this.rowLoadingAnim.visibility = View.GONE
+            rowLoadingAnim.visibility = View.GONE
         }
     }
 

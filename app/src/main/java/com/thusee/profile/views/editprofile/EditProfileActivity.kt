@@ -1,4 +1,4 @@
-package com.thusee.profile.views
+package com.thusee.profile.views.editprofile
 
 import android.os.Bundle
 import com.thusee.profile.R
