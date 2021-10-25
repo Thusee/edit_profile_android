@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="item_view_corner_radius">4dp</dimen>
+    <dimen name="item_view_card_elevation">20dp</dimen>
+    <dimen name="profile_image_height">50dp</dimen>
+
+</resources>

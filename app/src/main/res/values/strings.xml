@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Profile</string>
+
+    <string name="ok">OK</string>
+    <string name="error">Error</string>
+    <string name="failed_error">Something went wrong. Please try again later.</string>
+    <string name="network_not_available">Please check your internet connection and try again</string>
+    <string name="unauthorized_ex">Unauthorized exception, Please contact service providers</string>
+</resources>
