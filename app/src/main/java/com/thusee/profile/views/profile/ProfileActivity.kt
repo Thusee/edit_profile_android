@@ -17,7 +17,13 @@ class ProfileActivity: BaseActivity() {
 
         hideToolBarBackButton()
         setupObservers()
+        setCallBack()
     }
+
+    private fun setCallBack(){
+        rootView.setCallBack(ProfileOnClickListener(viewModel))
+    }
+
 
     private fun setupObservers() {
         viewModel.viewState.observe(this, UiViewObserver(rootView))

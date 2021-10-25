@@ -40,10 +40,6 @@ class ProfileViewImpl: ProfileView {
         }
     }
 
-    override fun navigateToEditProfile() {
-
-    }
-
     private fun updateProfile(data: Data) {
         rootView?.apply {
             this.displayNameText.text = data.displayName

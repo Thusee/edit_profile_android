@@ -11,7 +11,6 @@ interface ProfileView {
     fun changeState(state: State)
     fun changeUiState(state: UiState)
     fun setCallBack(listener: ProfileOnClickListener)
-    fun navigateToEditProfile()
 
     sealed class State{
         class DisplayProfileData(val data: Data): State()
