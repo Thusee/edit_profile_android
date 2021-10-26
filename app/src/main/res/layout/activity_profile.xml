@@ -15,10 +15,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:cardBackgroundColor="@color/white"
+        style="@style/CardViewStyle"
         app:cardCornerRadius="@dimen/item_view_corner_radius"
         card_view:cardUseCompatPadding="true"
         card_view:cardPreventCornerOverlap="true"
@@ -45,13 +42,8 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/displayNameLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Display Name"
-                android:textColor="#8A8A8A"
-                android:textSize="14sp"
-                app:fontFamily="@font/nunito_regular"
+                style="@style/TextViewLabel"
+                android:text="@string/displayName"
                 app:layout_constraintLeft_toRightOf="@id/profilePicture"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -61,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:paddingBottom="10dp"
                 android:textColor="@color/black"
-                android:textSize="17sp"
+                android:textSize="16sp"
                 app:fontFamily="@font/nunito_semi_bold"
                 app:layout_constraintLeft_toRightOf="@id/profilePicture"
                 app:layout_constraintBottom_toBottomOf="parent" />

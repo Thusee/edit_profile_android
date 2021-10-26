@@ -1,24 +1,24 @@
 package com.thusee.profile.views.profile.impl
 
-import android.app.Activity
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.thusee.profile.R
 import com.thusee.profile.data.response.Data
+import com.thusee.profile.databinding.ActivityProfileBinding
 import com.thusee.profile.util.handleError
 import com.thusee.profile.views.profile.ProfileOnClickListener
 import com.thusee.profile.views.profile.ProfileView
-import kotlinx.android.synthetic.main.activity_profile.view.*
 
 class ProfileViewImpl: ProfileView {
 
-    private var rootView: View? = null
+    lateinit var binding: ActivityProfileBinding
 
-    override fun inflate(activity: Activity, savedInstanceState: Bundle?): View? {
-        rootView = activity.layoutInflater.inflate(R.layout.activity_profile, null, false)
-        return rootView
+    override fun inflate(inflater: LayoutInflater, savedInstanceState: Bundle?): View? {
+        binding = ActivityProfileBinding.inflate(inflater, null, false)
+        return binding.root
     }
 
     override fun changeState(state: ProfileView.State) {
@@ -36,48 +36,41 @@ class ProfileViewImpl: ProfileView {
     }
 
     override fun setCallBack(listener: ProfileOnClickListener) {
-        rootView?.apply {
-            editButton.setOnClickListener(listener)
-        }
+        binding.editButton.setOnClickListener(listener)
     }
 
     private fun updateProfile(data: Data) {
-        rootView?.apply {
-            displayNameText.text = data.displayName
-            birthdayText.text = data.birthday
-            genderText.text = data.gender
-            ethnicityText.text = data.ethnicity
-            religionText.text = data.religion
-            heightText.text = "${data.height}"
-            figureText.text = data.figure
-            aboutMeText.text = data.aboutMe
-            locationText.text = data.location?.city
+        binding.displayNameText.text = data.displayName
+        binding.birthdayText.text = data.birthday
+        binding.genderText.text = data.gender
+        binding.ethnicityText.text = data.ethnicity
+        binding.religionText.text = data.religion
+        binding.heightText.text = "${data.height}"
+        binding.figureText.text = data.figure
+        binding.aboutMeText.text = data.aboutMe
+        binding.locationText.text = data.location?.city
 
-            Glide.with(rootView.context)
-                .load(data.profilePic)
-                .fitCenter()
-                .placeholder(R.mipmap.ic_launcher_round)
-                .into(profilePicture)
-        }
+        Glide.with(binding.root.context)
+            .load(data.profilePic)
+            .fitCenter()
+            .placeholder(R.mipmap.ic_launcher_round)
+            .into(binding.profilePicture)
     }
 
     private fun showProgress() {
-        rootView?.apply {
-            rowLoadingAnim.visibility = View.VISIBLE
-        }
+        binding.rowLoadingAnim.visibility = View.VISIBLE
     }
 
     private fun hideProgress() {
-        rootView?.apply {
-            rowLoadingAnim.visibility = View.GONE
-        }
+        binding.rowLoadingAnim.visibility = View.GONE
     }
 
     private fun showError(error: Throwable) {
-        rootView?.apply {
-            Toast.makeText(rootView.context, context.handleError(error), Toast.LENGTH_SHORT).show()
+        Toast.makeText(
+            binding.root.context,
+            binding.root.context.handleError(error),
+            Toast.LENGTH_SHORT
+        ).show()
 
-        }
     }
-
 }

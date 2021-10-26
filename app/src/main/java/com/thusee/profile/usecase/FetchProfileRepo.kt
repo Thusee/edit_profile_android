@@ -7,9 +7,7 @@ import kotlinx.coroutines.flow.flow
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
-class FetchProfileRepo: KoinComponent {
-
-    private val apiService: ApiService by inject()
+class FetchProfileRepo( private val apiService: ApiService): KoinComponent {
 
     suspend fun fetchProfileData(): Flow<ProfileResponse> {
         return flow {

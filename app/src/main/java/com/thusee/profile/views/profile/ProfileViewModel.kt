@@ -11,14 +11,13 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import org.koin.core.KoinComponent
-import org.koin.core.inject
 
-class ProfileViewModel: ViewModel(), KoinComponent {
+class ProfileViewModel(
+    private val fetchProfileRepo: FetchProfileRepo
+): ViewModel(), KoinComponent {
 
     val profileLiveData = MutableLiveData<ProfileLoadEvent>()
     val viewState = MutableLiveData<UiViewState>()
-
-    private val fetchProfileRepo: FetchProfileRepo by inject()
 
     private var data: Data? = null
 

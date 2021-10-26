@@ -2,12 +2,13 @@ package com.thusee.profile.views.profile
 
 import android.app.Activity
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import com.thusee.profile.data.response.Data
 
 interface ProfileView {
 
-    fun inflate(activity: Activity,  savedInstanceState: Bundle?): View?
+    fun inflate(inflater: LayoutInflater, savedInstanceState: Bundle?): View?
     fun changeState(state: State)
     fun changeUiState(state: UiState)
     fun setCallBack(listener: ProfileOnClickListener)
