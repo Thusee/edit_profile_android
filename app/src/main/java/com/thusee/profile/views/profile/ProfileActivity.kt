@@ -21,6 +21,11 @@ class ProfileActivity: BaseActivity() {
         setCallBack()
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.fetchProfileData()
+    }
+
     private fun setCallBack(){
         rootView.setCallBack(ProfileOnClickListener(viewModel))
     }

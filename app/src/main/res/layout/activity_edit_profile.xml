@@ -3,7 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/tools"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/activityBackground">
@@ -58,6 +57,7 @@
                     android:layout_width="0dp"
                     android:layout_height="@dimen/profile_image_height"
                     android:layout_marginEnd="10dp"
+                    android:layout_marginLeft="10dp"
                     android:translationY="1dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/editProfilePicture"
@@ -75,34 +75,205 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <View
-                    android:id="@+id/view1"
-                    style="@style/ViewDivider"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/editProfilePicture" />
-
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/editRealName"
                     style="@style/MyDenseOutlined"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/profile_image_height"
                     android:layout_marginEnd="10dp"
+                    android:layout_marginTop="10dp"
                     android:translationY="1dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toBottomOf="@id/editDisplayName">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/editRealNameText"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:hint="@string/displayName"
-                        android:inputType="text"
-                        android:lines="1"
-                        android:textColor="@color/black"
-                        android:textSize="15sp" />
-
+                        style="@style/TextInputEditText"
+                        android:hint="@string/realName"
+                        android:inputType="text" />
                 </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/editGender"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/profile_image_height"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginTop="10dp"
+                    android:translationY="1dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/editRealName">
+
+                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                        android:id="@+id/editGenderText"
+                        style="@style/MaterialAutoCompleteTextView"
+                        android:hint="@string/gender" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/editEthnicity"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/profile_image_height"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginTop="10dp"
+                    android:translationY="1dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/editGender">
+
+                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                        android:id="@+id/editEthnicityText"
+                        style="@style/MaterialAutoCompleteTextView"
+                        android:hint="@string/ethnicity" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/editReligion"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/profile_image_height"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginTop="10dp"
+                    android:translationY="1dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/editEthnicity">
+
+                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                        android:id="@+id/editReligionText"
+                        style="@style/MaterialAutoCompleteTextView"
+                        android:hint="@string/religion" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/editHeight"
+                    style="@style/MyDenseOutlined"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/profile_image_height"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginTop="10dp"
+                    android:translationY="1dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/editReligion">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editHeightText"
+                        style="@style/TextInputEditText"
+                        android:hint="@string/height"
+                        android:inputType="numberDecimal" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/editFigure"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/profile_image_height"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginTop="10dp"
+                    android:translationY="1dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/editHeight">
+
+                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                        android:id="@+id/editFigureText"
+                        style="@style/MaterialAutoCompleteTextView"
+                        android:hint="@string/figure" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/editMaritalStatus"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/profile_image_height"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginTop="10dp"
+                    android:translationY="1dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/editFigure">
+
+                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                        android:id="@+id/editMaritalStatusText"
+                        style="@style/MaterialAutoCompleteTextView"
+                        android:hint="@string/maritalStatus" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/editOccupation"
+                    style="@style/MyDenseOutlined"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/profile_image_height"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginTop="10dp"
+                    android:translationY="1dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/editMaritalStatus">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editOccupationText"
+                        style="@style/TextInputEditText"
+                        android:hint="@string/occupation"
+                        android:inputType="text" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/editAboutMe"
+                    style="@style/MyDenseOutlined"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/profile_image_height"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginTop="10dp"
+                    android:translationY="1dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/editOccupation">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editAboutMeText"
+                        style="@style/TextInputEditText"
+                        android:hint="@string/aboutMe"
+                        android:inputType="text" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/editLocation"
+                    style="@style/MyDenseOutlined"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/profile_image_height"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginTop="10dp"
+                    android:translationY="1dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/editAboutMe">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editLocationText"
+                        style="@style/TextInputEditText"
+                        android:hint="@string/location"
+                        android:inputType="text" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:id="@+id/submit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:fontFamily="@font/nunito_semi_bold"
+                    android:text="@string/submit"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/editLocation" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
     </ScrollView>

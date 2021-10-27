@@ -21,11 +21,7 @@ class ProfileViewModel(
 
     private var data: Data? = null
 
-    init {
-        fetchProfileData()
-    }
-
-    private fun fetchProfileData() {
+    fun fetchProfileData() {
         viewModelScope.launch {
             fetchProfileRepo.fetchProfileData().onStart {
                 viewState.value = UiViewState.ShowProgressBar
