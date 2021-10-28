@@ -1,4 +1,4 @@
-package com.thusee.profile.views.profile
+package com.thusee.profile.views.profile.event
 
 import com.thusee.profile.data.response.Data
 

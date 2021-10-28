@@ -7,7 +7,8 @@ import com.thusee.profile.data.request.UpdateProfileRequest
 import com.thusee.profile.data.response.KeyValue
 import com.thusee.profile.usecase.FetchMultiChoiceRepo
 import com.thusee.profile.usecase.UpdateProfileRepo
-import com.thusee.profile.viewstate.UiViewState
+import com.thusee.profile.views.editprofile.event.EditProfileUiViewState
+import com.thusee.profile.views.editprofile.event.MultiChoiceLoadEvent
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onStart
@@ -20,7 +21,7 @@ class EditProfileViewModel(
 ): ViewModel(),
     KoinComponent {
 
-    val viewState = MutableLiveData<UiViewState>()
+    val viewState = MutableLiveData<EditProfileUiViewState>()
     var multiChoiceLiveData = MutableLiveData<MultiChoiceLoadEvent>()
 
     private var data: MutableMap<String, List<KeyValue>>? = null
@@ -29,7 +30,7 @@ class EditProfileViewModel(
         fetchMultiChoiceData()
     }
 
-    fun fetchMultiChoiceData() {
+    private fun fetchMultiChoiceData() {
         viewModelScope.launch {
             fetchMultiChoiceRepo.getMultiChoiceData().catch { ex ->
 
@@ -41,18 +42,19 @@ class EditProfileViewModel(
     }
 
     fun getMultiChoiceData(): MutableMap<String, List<KeyValue>>? {
-        return data
+        return data?.toMutableMap()
     }
 
-    fun updateProfile() {
+    fun updateProfile(updateRequest: UpdateProfileRequest) {
         viewModelScope.launch {
-            updateProfileRepo.updateProfile(UpdateProfileRequest()).onStart {
-                viewState.value = UiViewState.ShowProgressBar
+            updateProfileRepo.updateProfile(updateRequest).onStart {
+                viewState.value = EditProfileUiViewState.ShowProgressBar
             }.catch { ex ->
-                viewState.value = UiViewState.HideProgressBar
+                viewState.value = EditProfileUiViewState.HideProgressBar
+                viewState.value = EditProfileUiViewState.ErrorHandle(ex)
             }.collect {
-                viewState.value = UiViewState.HideProgressBar
-
+                viewState.value = EditProfileUiViewState.HideProgressBar
+                viewState.value = EditProfileUiViewState.Response(it)
             }
         }
     }

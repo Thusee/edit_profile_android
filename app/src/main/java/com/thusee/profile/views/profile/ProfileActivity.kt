@@ -30,7 +30,6 @@ class ProfileActivity: BaseActivity() {
         rootView.setCallBack(ProfileOnClickListener(viewModel))
     }
 
-
     private fun setupObservers() {
         viewModel.viewState.observe(this, UiViewObserver(rootView))
         viewModel.profileLiveData.observe(this, ProfileLoadDataObserver(rootView))

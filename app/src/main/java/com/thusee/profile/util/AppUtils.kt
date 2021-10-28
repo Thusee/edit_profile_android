@@ -30,4 +30,17 @@ object AppUtils {
             filterMultiChoiceData(result, multiChoiceName)
         )
     }
+
+    fun getIdFromMultiChoiceList(
+        result: MutableMap<String, List<KeyValue>>,
+        multiChoiceName: String, value: String
+    ): String {
+        if (value.isNotEmpty()) {
+            return result[multiChoiceName]?.first {
+                it.name == value
+            }?.id.toString()
+        }
+        return ""
+    }
+
 }

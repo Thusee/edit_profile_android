@@ -1,6 +1,10 @@
 package com.thusee.profile.util
 
 import android.content.Context
+import android.view.View
+import android.widget.ImageView
+import android.widget.Toast
+import com.bumptech.glide.Glide
 import com.thusee.profile.R
 import retrofit2.HttpException
 import java.net.UnknownHostException
@@ -28,4 +32,32 @@ fun Context.handleError(e: Throwable?): String {
     }
 
     return getString(R.string.failed_error)
+}
+
+fun ImageView.loadImage(url: String) {
+
+    Glide.with(this)
+        .load(url)
+        .fitCenter()
+        .placeholder(R.mipmap.ic_launcher_round)
+        .into(this)
+}
+
+fun View.showProgressBar(){
+    this.visibility = View.VISIBLE
+}
+fun View.hideProgressBar(){
+    this.visibility = View.GONE
+}
+
+fun View.showError(error: Throwable) {
+    Toast.makeText(
+        this.context,
+        this.context.handleError(error),
+        Toast.LENGTH_SHORT
+    ).show()
+}
+
+fun View.showToast(message: String) {
+    Toast.makeText(this.context, message, Toast.LENGTH_LONG).show()
 }

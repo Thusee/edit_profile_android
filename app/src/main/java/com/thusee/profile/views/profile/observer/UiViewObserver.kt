@@ -2,15 +2,15 @@ package com.thusee.profile.views.profile.observer
 
 import androidx.lifecycle.Observer
 import com.thusee.profile.views.profile.ProfileView
-import com.thusee.profile.viewstate.UiViewState
+import com.thusee.profile.views.profile.event.ProfileUiViewState
 
-class UiViewObserver(private val profileView: ProfileView): Observer<UiViewState> {
+class UiViewObserver(private val profileView: ProfileView): Observer<ProfileUiViewState> {
 
-    override fun onChanged(event: UiViewState?) {
+    override fun onChanged(event: ProfileUiViewState?) {
         when (event){
-            is UiViewState.ShowProgressBar -> profileView.changeUiState(ProfileView.UiState.ShowProgressBar)
-            is UiViewState.HideProgressBar -> profileView.changeUiState(ProfileView.UiState.HideProgressBar)
-            is UiViewState.ErrorHandle -> profileView.changeUiState(
+            is ProfileUiViewState.ShowProgressBar -> profileView.changeUiState(ProfileView.UiState.ShowProgressBar)
+            is ProfileUiViewState.HideProgressBar -> profileView.changeUiState(ProfileView.UiState.HideProgressBar)
+            is ProfileUiViewState.ErrorHandle -> profileView.changeUiState(
                 ProfileView.UiState.ErrorHandle(
                     event.e
                 )

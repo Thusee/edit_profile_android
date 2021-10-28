@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
-import com.bumptech.glide.Glide
-import com.thusee.profile.R
 import com.thusee.profile.data.response.Data
 import com.thusee.profile.databinding.ActivityProfileBinding
 import com.thusee.profile.util.handleError
+import com.thusee.profile.util.hideProgressBar
+import com.thusee.profile.util.loadImage
+import com.thusee.profile.util.showError
+import com.thusee.profile.util.showProgressBar
 import com.thusee.profile.views.profile.ProfileOnClickListener
 import com.thusee.profile.views.profile.ProfileView
 
@@ -29,9 +31,9 @@ class ProfileViewImpl: ProfileView {
 
     override fun changeUiState(state: ProfileView.UiState) {
         when (state) {
-            is ProfileView.UiState.ShowProgressBar -> showProgress()
-            is ProfileView.UiState.HideProgressBar -> hideProgress()
-            is ProfileView.UiState.ErrorHandle -> showError(state.e)
+            is ProfileView.UiState.ShowProgressBar -> binding.rowLoadingAnim.showProgressBar()
+            is ProfileView.UiState.HideProgressBar -> binding.rowLoadingAnim.hideProgressBar()
+            is ProfileView.UiState.ErrorHandle -> binding.root.showError(state.e)
         }
     }
 
@@ -50,27 +52,7 @@ class ProfileViewImpl: ProfileView {
         binding.aboutMeText.text = data.aboutMe
         binding.locationText.text = data.location?.city
 
-        Glide.with(binding.root.context)
-            .load(data.profilePic)
-            .fitCenter()
-            .placeholder(R.mipmap.ic_launcher_round)
-            .into(binding.profilePicture)
+        binding.profilePicture.loadImage(data.profilePic)
     }
 
-    private fun showProgress() {
-        binding.rowLoadingAnim.visibility = View.VISIBLE
-    }
-
-    private fun hideProgress() {
-        binding.rowLoadingAnim.visibility = View.GONE
-    }
-
-    private fun showError(error: Throwable) {
-        Toast.makeText(
-            binding.root.context,
-            binding.root.context.handleError(error),
-            Toast.LENGTH_SHORT
-        ).show()
-
-    }
 }

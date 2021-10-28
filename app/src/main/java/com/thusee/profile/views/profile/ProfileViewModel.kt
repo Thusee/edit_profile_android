@@ -5,7 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.thusee.profile.data.response.Data
 import com.thusee.profile.usecase.FetchProfileRepo
-import com.thusee.profile.viewstate.UiViewState
+import com.thusee.profile.views.profile.event.ProfileLoadEvent
+import com.thusee.profile.views.profile.event.ProfileUiViewState
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onStart
@@ -17,19 +18,19 @@ class ProfileViewModel(
 ): ViewModel(), KoinComponent {
 
     val profileLiveData = MutableLiveData<ProfileLoadEvent>()
-    val viewState = MutableLiveData<UiViewState>()
+    val viewState = MutableLiveData<ProfileUiViewState>()
 
     private var data: Data? = null
 
     fun fetchProfileData() {
         viewModelScope.launch {
             fetchProfileRepo.fetchProfileData().onStart {
-                viewState.value = UiViewState.ShowProgressBar
+                viewState.value = ProfileUiViewState.ShowProgressBar
             }.catch { ex ->
-                viewState.value = UiViewState.HideProgressBar
-                viewState.value = UiViewState.ErrorHandle(ex)
+                viewState.value = ProfileUiViewState.HideProgressBar
+                viewState.value = ProfileUiViewState.ErrorHandle(ex)
             }.collect { response ->
-                viewState.value = UiViewState.HideProgressBar
+                viewState.value = ProfileUiViewState.HideProgressBar
                 if (response.code == 200) {
                     profileLiveData.value = ProfileLoadEvent.DisplayProfileData(response.data)
                     data = response.data
