@@ -13,9 +13,9 @@ class SubmitButtonClickListener(
         when (v?.id) {
             R.id.submit -> {
                 if (rootView.validateTextField()) {
-                    viewModel.getMultiChoiceData()?.let {
-                        rootView.getUpdateProfileRequest(it)
-                    }?.let { request ->
+                    viewModel.getMultiChoiceData().let {
+                        rootView.getUpdateProfileRequest(it, viewModel.getCities())
+                    }.let { request ->
                         viewModel.updateProfile(request)
                     }
                 }

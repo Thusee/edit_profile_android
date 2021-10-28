@@ -3,13 +3,17 @@ package com.thusee.profile.views.editprofile.impl
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
-import com.thusee.profile.data.request.Location
+import com.thusee.profile.R
+import com.thusee.profile.data.request.Cities
 import com.thusee.profile.data.request.UpdateProfileRequest
 import com.thusee.profile.data.response.Data
 import com.thusee.profile.data.response.KeyValue
 import com.thusee.profile.databinding.ActivityEditProfileBinding
 import com.thusee.profile.util.AppUtils.getArrayAdapter
+import com.thusee.profile.util.AppUtils.getCityObjectFromList
+import com.thusee.profile.util.AppUtils.getCityStringList
 import com.thusee.profile.util.AppUtils.getIdFromMultiChoiceList
 import com.thusee.profile.util.ETHNICITY
 import com.thusee.profile.util.FIGURE
@@ -26,6 +30,7 @@ import com.thusee.profile.views.editprofile.SubmitButtonClickListener
 import kotlinx.android.synthetic.main.activity_edit_profile.view.*
 import timber.log.Timber
 
+
 class EditProfileViewImpl: EditProfileView {
 
     lateinit var binding: ActivityEditProfileBinding
@@ -37,7 +42,10 @@ class EditProfileViewImpl: EditProfileView {
 
     override fun changeState(state: EditProfileView.State) {
         when (state) {
-            is EditProfileView.State.DisplayMultiChoiceData -> updateMultiChoiceUI(state.data)
+            is EditProfileView.State.DisplayMultiChoiceData -> updateMultiChoiceUI(
+                state.data,
+                state.cities
+            )
         }
     }
 
@@ -58,7 +66,7 @@ class EditProfileViewImpl: EditProfileView {
         binding.editLocationText.setText(data.location?.city)
     }
 
-    override fun getUpdateProfileRequest(result: MutableMap<String, List<KeyValue>>): UpdateProfileRequest {
+    override fun getUpdateProfileRequest(result: MutableMap<String, List<KeyValue>>, cities: List<Cities>): UpdateProfileRequest {
 
         val updateRequest = UpdateProfileRequest()
         updateRequest.profilePic =
@@ -90,8 +98,9 @@ class EditProfileViewImpl: EditProfileView {
         updateRequest.height = binding.editHeightText.text.toString().toInt()
         updateRequest.occuapion = binding.editOccupationText.text.toString()
         updateRequest.aboutMe = binding.editAboutMeText.text.toString()
-        updateRequest.location =
-            Location(binding.editLocationText.text.toString(), "35°18'S", "149°07'E")
+        updateRequest.location = getCityObjectFromList(cities, binding.editLocationText.text.toString())
+
+
 
         Timber.d("UpdateRequest : $updateRequest")
         return updateRequest
@@ -148,7 +157,10 @@ class EditProfileViewImpl: EditProfileView {
         }
     }
 
-    private fun updateMultiChoiceUI(result: MutableMap<String, List<KeyValue>>) {
+    private fun updateMultiChoiceUI(
+        result: MutableMap<String, List<KeyValue>>,
+        cities: List<Cities>
+    ) {
 
         (binding.editEthnicity.editEthnicityText as? AutoCompleteTextView)?.setAdapter(
             getArrayAdapter(result, binding.root.context, ETHNICITY)
@@ -165,5 +177,14 @@ class EditProfileViewImpl: EditProfileView {
         (binding.editReligion.editReligionText as? AutoCompleteTextView)?.setAdapter(
             getArrayAdapter(result, binding.root.context, RELIGION)
         )
+
+        val adapter: ArrayAdapter<String> =
+            ArrayAdapter(
+                binding.root.context,
+                R.layout.list_item,
+                getCityStringList(cities)
+            )
+
+        (binding.editLocation.editLocationText as? AutoCompleteTextView)?.setAdapter(adapter)
     }
 }

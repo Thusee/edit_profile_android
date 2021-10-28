@@ -14,9 +14,10 @@ data class UpdateProfileRequest (@field:Json(name = "displayName") var displayNa
                                  @field:Json(name = "maritalStatus") var maritalStatus: String = "",
                                  @field:Json(name = "occuapion") var occuapion: String = "",
                                  @field:Json(name = "aboutMe") var aboutMe: String = "",
-                                 @field:Json(name = "location") var location: Location? = null,
+                                 @field:Json(name = "location") var location: Cities? = null,
 )
-
-data class Location(@field:Json(name = "city") var city: String = "",
-                    @field:Json(name = "lat") var lat: String = "",
-                    @field:Json(name = "lon") var lon: String = "")
+data class Cities(
+    @field:Json(name = "city") val city: String = "",
+    @field:Json(name = "lat") val lat: String = "",
+    @field:Json(name = "lon") val lon: String = ""
+)

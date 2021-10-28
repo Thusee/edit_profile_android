@@ -10,7 +10,7 @@ class MultiChoiceObserver(private val editProfileView: EditProfileView):
     override fun onChanged(event: MultiChoiceLoadEvent?) {
         when (event) {
             is MultiChoiceLoadEvent.LoadMultiChoiceData -> editProfileView.changeState(
-                EditProfileView.State.DisplayMultiChoiceData(event.response)
+                EditProfileView.State.DisplayMultiChoiceData(event.response, event.cities)
             )
         }
     }

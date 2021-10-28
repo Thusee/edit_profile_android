@@ -3,6 +3,7 @@ package com.thusee.profile.util
 import android.content.Context
 import android.widget.ArrayAdapter
 import com.thusee.profile.R
+import com.thusee.profile.data.request.Cities
 import com.thusee.profile.data.response.KeyValue
 
 object AppUtils {
@@ -41,6 +42,25 @@ object AppUtils {
             }?.id.toString()
         }
         return ""
+    }
+
+    fun readFromAsset(context: Context, filename: String): String {
+        return try {
+            context.resources.assets.open(filename).bufferedReader().use { it.readText() }
+        } catch (ex: Exception) {
+            ""
+        }
+    }
+
+    fun getCityObjectFromList(list: List<Cities>, city: String): Cities? {
+        if (city.isNotEmpty()) {
+            return list.find { it.city == city }
+        }
+        return Cities()
+    }
+
+    fun getCityStringList(cities: List<Cities>): List<String> {
+        return cities.map { it.city }
     }
 
 }

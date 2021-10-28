@@ -65,6 +65,8 @@ dependencies {
     //log
     implementation "com.jakewharton.timber:timber:$timber_version"
 
+    implementation "com.google.code.gson:gson:$gson"
+
     implementation "com.airbnb.android:lottie:$timber_lottie"
 
     //Glide
